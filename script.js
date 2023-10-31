@@ -94,7 +94,7 @@ var upperCasedCharacters = [
       var passwordLength = parseInt(prompt('Enter the password length (between 8 and 128 characters):'));
       if (passwordLength < 8 || passwordLength > 128 || isNaN(passwordLength)) {
         alert('Please enter a valid password length.');
-        return;
+        return null;
       }
     
       var useLowerCase = prompt('Would you like to use lowercase characters?');
@@ -104,18 +104,20 @@ var upperCasedCharacters = [
     
       if (!useLowerCase && !useUpperCase && !useNumeric && !useSpecialChars) {
         alert('Please select at least one character type.');
-        return;
+        return null;
       }
     
-      return {
+      var passwordOptions = {
         length: passwordLength,
-        useLowerCase: useLowerCase,
-        useUpperCase: useUpperCase,
-        useNumeric: useNumeric,
-        useSpecialChars: useSpecialChars,
+        lowerCasedCharacters: useLowerCase,
+        upperCasedCharacters: useUpperCase,
+        numericCharacters: useNumeric,
+        specialCharacters: useSpecialChars,
       };
+
+    return passwordOptions; 
 }
-getPasswordOptions();
+
 
 // Function for getting a random element from an array
 function getRandom(arr) {
@@ -125,18 +127,51 @@ function getRandom(arr) {
 
 
 // Function to generate password with user input
-function generatePassword() {
+  function generatePassword() {
+    var options = getPasswordOptions();
+    if (!options) {
+      return ""; // Return an empty string if options are invalid
+    }
+  
+    // Create a character pool based on selected options
+    var characterPool = [];
+    var definitiveCharacters = [];
 
-}
+    if (options.specialCharacters) {
+      characterPool = characterPool.concat(specialCharacters);
+      definitiveCharacters .push(getRandom(specialCharacters));
+    }
+    if (options.numericCharacters) {
+      characterPool = characterPool.concat(numericCharacters);
+      definitiveCharacters .push(getRandom(numericCharacters));
+    }
+    if (options.lowerCasedCharacters) {
+      characterPool = characterPool.concat(lowerCasedCharacters);
+      definitiveCharacters .push(getRandom(lowerCasedCharacters));
+    }
+    if (options.upperCasedCharacters) {
+      characterPool = characterPool.concat(upperCasedCharacters);
+      definitiveCharacters .push(getRandom(upperCasedCharacters));
+    }
+  
+    // Generate the password
+    for (var i = definitiveCharacters .length; i < options.length; i++) {
+      var randomCharacter = getRandom(characterPool);
+      definitiveCharacters .push(randomCharacter);
+    }
+  
+    return definitiveCharacters .join('');
+  }
+
 
 // Get references to the #generate element
-var generateBtn = document.querySelector('#generate');
+var generateBtn = document.querySelector('#generate'); 
 
 // Write password to the #password input
+
 function writePassword() {
   var password = generatePassword();
   var passwordText = document.querySelector('#password');
-
   passwordText.value = password;
 }
 

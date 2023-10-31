@@ -12,6 +12,8 @@ In this challenge, specific criteria were applied to generate a random password 
 
 ## Link to deployed application:
 
+https://qaleh1000.github.io/Password-Generator/
+
 ## Collaborators
 
 I worked on this challenge with Ikran Hussein GitHub: https://github.com/Ikran1

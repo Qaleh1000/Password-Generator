@@ -97,10 +97,10 @@ var upperCasedCharacters = [
         return;
       }
     
-      var useLowerCase = prompt('Does this include lowercase characters?');
-      var useUpperCase = prompt('Does this include uppercase characters?');
-      var useNumeric = prompt('Does this include numeric characters?');
-      var useSpecialChars = prompt('Does this include special characters?');
+      var useLowerCase = prompt('Would you like to use lowercase characters?');
+      var useUpperCase = prompt('Would you like to use uppercase characters?');
+      var useNumeric = prompt('Would you like to use numeric characters?');
+      var useSpecialChars = prompt('Would you like to use special characters?');
     
       if (!useLowerCase && !useUpperCase && !useNumeric && !useSpecialChars) {
         alert('Please select at least one character type.');
@@ -115,9 +115,14 @@ var upperCasedCharacters = [
         useSpecialChars: useSpecialChars,
       };
 }
+getPasswordOptions();
 
 // Function for getting a random element from an array
-  
+function getRandom(arr) {
+  var randomIndex = Math.floor(Math.random() * arr.length);
+  return arr[randomIndex];
+}
+
 
 // Function to generate password with user input
 function generatePassword() {
